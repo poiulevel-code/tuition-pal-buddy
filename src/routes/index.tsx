@@ -470,6 +470,12 @@ function Index() {
   const [grupFiltre, setGrupFiltre] = useState<Grup | "hepsi">("hepsi");
   const [aidatListeAcik, setAidatListeAcik] = useState(false);
   const gruplar = useGruplar();
+  const seciliGrupAdi = (() => {
+    if (grupFiltre === "hepsi") return null;
+    const grupAdi = gruplar.find((grup) => grup.id === grupFiltre)?.ad;
+    const seviyeEslesmesi = grupAdi?.match(/^(\d+)\.\s*Seviye$/i);
+    return seviyeEslesmesi ? `Seviye ${seviyeEslesmesi[1]}` : grupAdi;
+  })();
   const [grupTaslak, setGrupTaslak] = useState<GrupBilgi[] | null>(null);
   const [yeniTalebeAcik, setYeniTalebeAcik] = useState<null | "hafiz" | "aidat">(null);
   const [yeniTalebe, setYeniTalebe] = useState({
@@ -1059,8 +1065,13 @@ function Index() {
                     <Menu className="h-5 w-5" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-56">
-                  <DropdownMenuLabel>Bölümler</DropdownMenuLabel>
+                <DropdownMenuContent
+                  align="start"
+                  className="w-[min(19rem,calc(100vw-1rem))] p-1.5 [&_[role=menuitem]]:min-h-10 [&_[role=menuitem]]:whitespace-normal [&_[role=menuitem]]:px-3 [&_[role=menuitem]]:py-2 [&_[role=menuitem]]:text-[15px] [&_[role=menuitem]]:leading-snug"
+                >
+                  <DropdownMenuLabel className="px-3 text-[13px] text-muted-foreground">
+                    Bölümler
+                  </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   {(
                     [
@@ -1090,7 +1101,9 @@ function Index() {
                     Talebe Listesi
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuLabel>Gruplar</DropdownMenuLabel>
+                  <DropdownMenuLabel className="px-3 text-[13px] text-muted-foreground">
+                    Gruplar
+                  </DropdownMenuLabel>
                   {gruplar.map((g) => {
                     const k = g.id;
                     const etiket = g.ad;
@@ -1115,7 +1128,9 @@ function Index() {
                   {hocaModu && (
                     <>
                       <DropdownMenuSeparator />
-                      <DropdownMenuLabel>Yönetim</DropdownMenuLabel>
+                      <DropdownMenuLabel className="px-3 text-[13px] text-muted-foreground">
+                        Yönetim
+                      </DropdownMenuLabel>
                       <DropdownMenuItem
                         onSelect={() => {
                           menudenAcildi.current = true;
@@ -1154,7 +1169,7 @@ function Index() {
                 {aidatListeAcik
                   ? "Talebe Listesi"
                   : sekme === "aidat"
-                    ? tr("altBaslikAidat")
+                    ? seciliGrupAdi ?? tr("altBaslikAidat")
                     : tr("altBaslikHafizlik")}
               </span>
             </div>
