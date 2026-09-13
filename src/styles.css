@@ -159,7 +159,7 @@
 
 /* Keep installed iPhone/Android apps clear of the status bar and screen cutouts. */
 .app-safe-page {
-  padding-top: calc(env(safe-area-inset-top, 0px) + 3.25rem);
+  padding-top: 0px;
   padding-right: max(0.5rem, env(safe-area-inset-right));
   padding-bottom: max(1rem, env(safe-area-inset-bottom));
   padding-left: max(0.5rem, env(safe-area-inset-left));
