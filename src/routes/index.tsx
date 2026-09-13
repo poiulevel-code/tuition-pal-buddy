@@ -470,8 +470,12 @@ function Index() {
   const [grupFiltre, setGrupFiltre] = useState<Grup | "hepsi">("hepsi");
   const [aidatListeAcik, setAidatListeAcik] = useState(false);
   const gruplar = useGruplar();
-  const seciliGrupAdi =
-    grupFiltre === "hepsi" ? null : gruplar.find((grup) => grup.id === grupFiltre)?.ad;
+  const seciliGrupAdi = (() => {
+    if (grupFiltre === "hepsi") return null;
+    const grupAdi = gruplar.find((grup) => grup.id === grupFiltre)?.ad;
+    const seviyeEslesmesi = grupAdi?.match(/^(\d+)\.\s*Seviye$/i);
+    return seviyeEslesmesi ? `Seviye ${seviyeEslesmesi[1]}` : grupAdi;
+  })();
   const [grupTaslak, setGrupTaslak] = useState<GrupBilgi[] | null>(null);
   const [yeniTalebeAcik, setYeniTalebeAcik] = useState<null | "hafiz" | "aidat">(null);
   const [yeniTalebe, setYeniTalebe] = useState({
