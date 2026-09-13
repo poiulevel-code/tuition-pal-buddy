@@ -1158,6 +1158,8 @@ function Index() {
                     : tr("altBaslikHafizlik")}
               </span>
             </div>
+          </div>
+          <header className="relative mb-6 flex flex-col items-center gap-3 text-center sm:mb-12 sm:gap-5">
             <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary sm:h-20 sm:w-20">
               <GraduationCap className="h-7 w-7 sm:h-10 sm:w-10" />
             </div>
