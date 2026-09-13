@@ -1046,8 +1046,8 @@ function Index() {
     <DilContext.Provider value={dil}>
       <div className="min-h-screen bg-background">
         <div className="app-safe-page mx-auto flex min-h-dvh w-full max-w-none flex-col sm:px-6 sm:py-8">
-          <header className="relative mb-6 flex flex-col items-center gap-3 text-center sm:mb-12 sm:gap-5">
-            <div className="flex w-full min-w-0 items-center gap-2 text-left sm:absolute sm:left-0 sm:top-0 sm:w-auto">
+          <div className="sticky top-0 z-40 -mx-2 mb-4 flex w-[calc(100%+1rem)] items-center gap-2 border-b border-border/60 bg-background px-2 pb-2 pt-[max(0.5rem,env(safe-area-inset-top))] text-left sm:-mx-6 sm:mb-6 sm:w-[calc(100%+3rem)] sm:px-6">
+            <div className="flex w-full min-w-0 items-center gap-2">
               <DropdownMenu open={menuAcik} onOpenChange={setMenuAcik}>
                 <DropdownMenuTrigger asChild>
                   <Button
