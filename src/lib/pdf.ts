@@ -84,9 +84,26 @@ export function listeYazdir({
   tfoot td { font-size: 10px; color: #6b7770; border: none; padding-top: 10px; }
   thead { display: table-header-group; }
   tr { page-break-inside: avoid; }
+  .ust-bar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; gap: 10px;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px;
+    background: #1f6f4a; color: #fff;
+  }
+  .ust-bar button {
+    border: none; border-radius: 8px; cursor: pointer;
+    background: #fff; color: #1f6f4a; font-weight: 700;
+    font-size: 14px; padding: 10px 16px;
+  }
+  .ust-bar span { font-size: 13px; font-weight: 600; }
+  @media print { .ust-bar { display: none; } }
 </style>
 </head>
 <body class="${tekSayfa ? "tek-sayfa" : ""}">
+  <div class="ust-bar">
+    <button type="button" onclick="if (window.history.length > 1) { window.history.back(); } else { window.close(); }">&#8592; Geri Dön</button>
+    <span>PDF olarak kaydettikten sonra buradan geri dönebilirsiniz</span>
+  </div>
   <div class="ust">
     <h1>SİEC JİGJİGA KURSU</h1>
     <h2>${kacis(altBaslik)}</h2>
